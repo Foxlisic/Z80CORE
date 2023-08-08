@@ -19,37 +19,18 @@ module kr580(
 
 );
 
-// Базовый набор
-`define ALU_ADD     4'h0
-`define ALU_ADC     4'h1
-`define ALU_SUB     4'h2
-`define ALU_SBC     4'h3
-`define ALU_AND     4'h4
-`define ALU_XOR     4'h5
-`define ALU_OR      4'h6
-`define ALU_CP      4'h7
+localparam
 
-// Дополнительный набор
-`define ALU_RLC     4'h8
-`define ALU_RRC     4'h9
-`define ALU_RL      4'hA
-`define ALU_RR      4'hB
-`define ALU_DAA     4'hC
-`define ALU_CPL     4'hD
-`define ALU_SCF     4'hE
-`define ALU_CCF     4'hF
+    // Базовый набор
+    ALU_ADD = 0,    ALU_ADC = 1,    ALU_SUB = 2,    ALU_SBC = 3,
+    ALU_AND = 4,    ALU_XOR = 5,    ALU_OR  = 6,    ALU_CP  = 7,
+    ALU_RLC = 8,    ALU_RRC = 9,    ALU_RL  = 10,   ALU_RR  = 11,
+    ALU_DAA = 12,   ALU_CPL = 13,   ALU_SCF = 14,   ALU_CCF = 15,
 
-// Набор CBh
-`define ALU_SLA     5'h10
-`define ALU_SRA     5'h11
-`define ALU_SLL     5'h12
-`define ALU_SRL     5'h13
-`define ALU_BIT     5'h14
-`define ALU_RES     5'h15
-`define ALU_SET     5'h16
-`define ALU_RRLD    5'h17
-`define ALU_ADCW    5'h18
-`define ALU_SBCW    5'h19
+    // Набор CBh
+    ALU_SLA = 16,   ALU_SRA = 17,   ALU_SLL = 18,   ALU_SRL = 19,
+    ALU_BIT = 20,   ALU_RES = 21,   ALU_SET = 22,   ALU_RRLD = 23,
+    ALU_ADCW = 24,  ALU_SBCW = 25;
 
 `define CARRY       0
 `define NEG         1
@@ -271,7 +252,7 @@ always @(posedge pin_clk) if (pin_locked) begin
                     reg_n     <= {opcode[5:4], 1'b0};
                     op1       <= hl[ 7:0];
                     op2       <= reg_r8;
-                    alu_m     <= `ALU_ADD;
+                    alu_m     <= ALU_ADD;
                 end
                 2: begin t <= 3;
                     op1       <= hl[15:8];
@@ -279,7 +260,7 @@ always @(posedge pin_clk) if (pin_locked) begin
                     reg_n     <= `REG_L;
                     reg_b     <= 1'b1;
                     reg_l     <= alu_r[7:0];
-                    alu_m     <= `ALU_ADC;
+                    alu_m     <= ALU_ADC;
                     reg_f[0]  <= alu_f[`CARRY];
                     fw        <= 1'b1;
                 end
@@ -381,7 +362,7 @@ always @(posedge pin_clk) if (pin_locked) begin
                 1: begin t <= 2;
                     op1    <= reg_hl ? pin_i : reg_r8;
                     op2    <= 1;
-                    alu_m  <= opcode[0] ? `ALU_SUB : `ALU_ADD; end
+                    alu_m  <= opcode[0] ? ALU_SUB : ALU_ADD; end
                 2: begin t <= 3;
                     pin_enw <=  reg_hl;
                     reg_b   <= ~reg_hl;
@@ -620,7 +601,7 @@ always @(posedge pin_clk) if (pin_locked) begin
                     8'b01_xxx_010: case (m)
 
                         0: begin m <= 1; op1w <= hl;      reg_n <= ed[5:4]; end
-                        1: begin m <= 2; op2w <= reg_r16; alu_m <= ed[3] ? `ALU_ADCW : `ALU_SBCW; end
+                        1: begin m <= 2; op2w <= reg_r16; alu_m <= ed[3] ? ALU_ADCW : ALU_SBCW; end
                         2: begin t <= 0;
 
                             fw    <= 1;
@@ -668,7 +649,7 @@ always @(posedge pin_clk) if (pin_locked) begin
                     // 4 NEG
                     8'b01_xxx_100: case (m)
 
-                        0: begin m <= 1; op1 <= 0; op2 <= a; alu_m <= `ALU_SUB; end
+                        0: begin m <= 1; op1 <= 0; op2 <= a; alu_m <= ALU_SUB; end
                         1: begin t <= 0;
 
                             fw    <= 1;
@@ -701,7 +682,7 @@ always @(posedge pin_clk) if (pin_locked) begin
                         end
 
                         // Вычислить из записать флаги
-                        2: begin m <= 3; op1 <= a; alu_m <= `ALU_RRLD; end
+                        2: begin m <= 3; op1 <= a; alu_m <= ALU_RRLD; end
                         3: begin t <= 0; fw  <= 1; reg_f <= alu_f; end
 
                     endcase
@@ -801,13 +782,13 @@ always @(posedge pin_clk) if (pin_locked) begin
                     casex (ed)
 
                         // Инструкции RLC, RRC, RL, RR
-                        8'b00_0xx_xxx: alu_m <= `ALU_RLC + ed[4:3];
+                        8'b00_0xx_xxx: alu_m <= ALU_RLC + ed[4:3];
 
                         // Инструкции SLA, SRA, SLL, SRL
-                        8'b00_1xx_xxx: alu_m <= `ALU_SLA + ed[4:3];
+                        8'b00_1xx_xxx: alu_m <= ALU_SLA + ed[4:3];
 
                         // Инструкции 101xx: 101[01]=BIT, 101[10]=RES, 101[11]=SET
-                              default: alu_m <= `ALU_BIT + (ed[7:6] - 1);
+                              default: alu_m <= ALU_BIT + (ed[7:6] - 1);
 
                     endcase
 
@@ -817,7 +798,7 @@ always @(posedge pin_clk) if (pin_locked) begin
                     fw    <= 1'b1;
                     reg_f <= alu_f;
 
-                    if (alu_m != `ALU_BIT) begin
+                    if (alu_m != ALU_BIT) begin
 
                          pin_enw <=  reg_hl;
                          alt_a   <=  reg_hl;
@@ -855,7 +836,7 @@ always @* begin
     case (alu_m)
 
         /* op1 + op2 => r */
-        `ALU_ADD: begin
+        ALU_ADD: begin
 
             alu_r = op1 + op2;
             alu_f = {
@@ -874,7 +855,7 @@ always @* begin
         end
 
         /* op1 + op2 + carry => r */
-        `ALU_ADC: begin
+        ALU_ADC: begin
 
             alu_r = op1 + op2 + f[ `CARRY ];
             alu_f = {
@@ -893,7 +874,7 @@ always @* begin
         end
 
         /* op1 - op2 => r */
-        `ALU_SUB: begin
+        ALU_SUB: begin
 
             alu_r = op1 - op2;
             alu_f = {
@@ -912,7 +893,7 @@ always @* begin
         end
 
         /* op1 - op2 - carry => r */
-        `ALU_SBC: begin
+        ALU_SBC: begin
 
             alu_r = op1 - op2 - f[`CARRY];
             alu_f = {
@@ -931,7 +912,7 @@ always @* begin
         end
 
         /* op1 & op2 => r */
-        `ALU_AND: begin
+        ALU_AND: begin
 
             alu_r = op1 & op2;
             alu_f = {
@@ -950,7 +931,7 @@ always @* begin
         end
 
         /* op1 ^ op2 => r */
-        `ALU_XOR: begin
+        ALU_XOR: begin
 
             alu_r = op1 ^ op2;
             alu_f = {
@@ -969,7 +950,7 @@ always @* begin
         end
 
         /* op1 | op2 */
-        `ALU_OR: begin
+        ALU_OR: begin
 
             alu_r = op1 | op2;
             alu_f = {
@@ -988,7 +969,7 @@ always @* begin
         end
 
         /* op1 - op2 */
-        `ALU_CP: begin
+        ALU_CP: begin
 
             alu_r = op1 - op2;
             alu_f = {
@@ -1007,7 +988,7 @@ always @* begin
         end
 
         /* Циклический сдвиг налево */
-        `ALU_RLC: begin
+        ALU_RLC: begin
 
             alu_r = {op1[6:0], op1[7]};
             alu_f = {
@@ -1026,7 +1007,7 @@ always @* begin
         end
 
         /* Циклический сдвиг направо */
-        `ALU_RRC: begin
+        ALU_RRC: begin
 
             alu_r = {op1[0], op1[7:1]};
             alu_f = {
@@ -1045,7 +1026,7 @@ always @* begin
         end
 
         /* Сдвиг с заемом C влево */
-        `ALU_RL: begin
+        ALU_RL: begin
 
             alu_r = {op1[6:0], f[`CARRY]};
             alu_f = {
@@ -1064,7 +1045,7 @@ always @* begin
         end
 
         /* Сдвиг с заемом C вправо */
-        `ALU_RR: begin
+        ALU_RR: begin
 
             alu_r = {f[`CARRY], op1[7:1]};
             alu_f = {
@@ -1083,7 +1064,7 @@ always @* begin
         end
 
         /* Десятичная коррекция */
-        `ALU_DAA: begin
+        ALU_DAA: begin
 
             if (f[`NEG])
                 alu_r = op1
@@ -1110,7 +1091,7 @@ always @* begin
         end
 
         /* A ^ $FF */
-        `ALU_CPL: begin
+        ALU_CPL: begin
 
             alu_r = ~a;
             alu_f = {
@@ -1129,7 +1110,7 @@ always @* begin
         end
 
         /* CF = 1 */
-        `ALU_SCF: begin
+        ALU_SCF: begin
 
             alu_r = a;
             alu_f = {
@@ -1148,7 +1129,7 @@ always @* begin
         end
 
         /* CF ^= 1 */
-        `ALU_CCF: begin
+        ALU_CCF: begin
 
             alu_r = a;
             alu_f = {
@@ -1167,7 +1148,7 @@ always @* begin
         end
 
         /* Логический влево */
-        `ALU_SLA: begin
+        ALU_SLA: begin
 
             alu_r = {op1[6:0], 1'b0};
             alu_f = {
@@ -1186,7 +1167,7 @@ always @* begin
         end
 
         // Особый случай сдвига
-        `ALU_SLL: begin
+        ALU_SLL: begin
 
             alu_r = {op1[6:0], 1'b1};
             alu_f = {
@@ -1205,7 +1186,7 @@ always @* begin
         end
 
         /* Арифметический вправо */
-        `ALU_SRA: begin
+        ALU_SRA: begin
 
             alu_r = {op1[7], op1[7:1]};
             alu_f = {
@@ -1224,7 +1205,7 @@ always @* begin
         end
 
         /* Логический вправо */
-        `ALU_SRL: begin
+        ALU_SRL: begin
 
             alu_r = {1'b0, op1[7:1]};
             alu_f = {
@@ -1243,7 +1224,7 @@ always @* begin
         end
 
         /* Проверить бит op1, op2[2:0] номер бита */
-        `ALU_BIT: begin
+        ALU_BIT: begin
 
             alu_r = op1;
             bit_z = !op1[ op2[2:0] ]; // Вычисленный бит
@@ -1263,8 +1244,8 @@ always @* begin
         end
 
         /* Проверить бит op1, op2[2:0] номер бита, op[3] какой ставить */
-        `ALU_RES,
-        `ALU_SET: begin
+        ALU_RES,
+        ALU_SET: begin
 
             case (op2[2:0])
 
@@ -1284,7 +1265,7 @@ always @* begin
         end
 
         /* (16 bit) op1 + op2 + C => r */
-        `ALU_ADCW: begin
+        ALU_ADCW: begin
 
             alu_r16 = op1w + op2c;
             alu_f = {
@@ -1302,7 +1283,7 @@ always @* begin
         end
 
         /* (16 bit) op1 - op2 - C => r */
-        `ALU_SBCW: begin
+        ALU_SBCW: begin
 
             alu_r16 = op1w - op2c;
             alu_f = {
@@ -1320,7 +1301,7 @@ always @* begin
         end
 
         /* RLD | RRD */
-        `ALU_RRLD: begin
+        ALU_RRLD: begin
 
             alu_r = op1;
             alu_f = {

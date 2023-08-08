@@ -54,18 +54,17 @@ reg        pin_intr = 1'b0;
 
 kr580 cpu(
 
-    clock_cpu,
-    bus_data_i,
-    bus_addr,
-    ena_wrmem,
-    bus_data_o,
-
-    pin_pa,
-    pin_pi,
-    pin_po,
-    pin_pw,
-
-    pin_intr
+    .pin_clk    (clock_cpu),
+    .pin_locked (1'b1),
+    .pin_i      (bus_data_i),
+    .pin_a      (bus_addr),
+    .pin_enw    (ena_wrmem),
+    .pin_o      (bus_data_o),
+    .pin_pa     (pin_pa),
+    .pin_pi     (pin_pi),
+    .pin_po     (pin_po),
+    .pin_pw     (pin_pw),
+    .pin_intr   (pin_intr)
 );
 
 endmodule
