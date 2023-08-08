@@ -1,0 +1,9 @@
+c.img
+bochsout.txt
+bx_enh_dbg.ini
+boot.bin
+speccy.bin
+*.lock
+*.exe
+update
+dist

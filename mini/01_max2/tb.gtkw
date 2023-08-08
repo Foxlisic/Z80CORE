@@ -1,0 +1,64 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Thu Jun 16 09:01:28 2022
+[*]
+[dumpfile] "e:\dev\z80\zmini\tb.vcd"
+[dumpfile_mtime] "Thu Jun 16 08:47:34 2022"
+[dumpfile_size] 60050
+[savefile] "e:\dev\z80\zmini\tb.gtkw"
+[timestart] 29
+[size] 960 440
+[pos] -1 -1
+*-7.000000 217 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb.
+[sst_width] 197
+[signals_width] 166
+[sst_expanded] 1
+[sst_vpaned_height] 97
+@28
+tb.clock
+tb.core_inst.clock
+@800200
+-IO
+@22
+tb.core_inst.address[15:0]
+tb.core_inst.in[7:0]
+tb.core_inst.out[7:0]
+@28
+tb.core_inst.we
+@1000200
+-IO
+@800200
+-CONTROL
+@28
+tb.core_inst.t[2:0]
+@29
+tb.core_inst.m[2:0]
+@1000200
+-CONTROL
+@800200
+-REG
+@22
+tb.core_inst.pc[15:0]
+tb.core_inst.sp[15:0]
+tb.core_inst.b[7:0]
+tb.core_inst.c[7:0]
+tb.core_inst.d[7:0]
+tb.core_inst.e[7:0]
+tb.core_inst.h[7:0]
+tb.core_inst.l[7:0]
+tb.core_inst.f[7:0]
+tb.core_inst.a[7:0]
+@1000200
+-REG
+@800200
+-ALU
+@22
+tb.core_inst.alu[3:0]
+tb.core_inst.alu_f[7:0]
+tb.core_inst.alu_r[8:0]
+tb.core_inst.wb[7:0]
+@1000200
+-ALU
+[pattern_trace] 1
+[pattern_trace] 0

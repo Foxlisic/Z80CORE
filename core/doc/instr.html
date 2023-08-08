@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Basic instruction set</title>
+<style>
+table { border-collapse: collapse; } 
+table td, 
+table th { 
+    padding: 4px; border: 1px solid #ccc; font-family: Monospace; 
+    width: 100px; vertical-align: top; 
+    text-transform: uppercase;
+}
+table td b { display: block; }
+table th { background: #eee; }
+table td.ok { background: #cfc; }
+table td.px { background: #cff; }
+</style>
+</head>
+<body>
+<table>
+    <tr>
+        <th></th>
+        <th>0</th><th>1</th><th>2</th><th>3</th>
+        <th>4</th><th>5</th><th>6</th><th>7</th>
+        <th>8</th><th>9</th><th>A</th><th>B</th>
+        <th>C</th><th>D</th><th>E</th><th>F</th>
+    </tr>
+    <tr>
+        <th>0</th>
+        <td class="ok"><b>nop</b></td>
+        <td class="ok"><b>ld</b> bc,**</td>
+        <td class="ok"><b>ld</b> (bc),a</td>
+        <td class="ok"><b>inc</b> bc</td>
+        <td class="ok"><b>inc</b> b</td>
+        <td class="ok"><b>dec</b> b</td>
+        <td class="ok"><b>ld</b> b,*</td>
+        <td class="ok"><b>rlca</b></td>
+        <td class="ok"><b>ex</b> af,af'</td>
+        <td class="ok"><b>add</b> hl, bc</td>
+        <td class="ok"><b>ld</b> a,(bc)</td>
+        <td class="ok"><b>dec</b> bc</td>
+        <td class="ok"><b>inc</b> c</td>
+        <td class="ok"><b>dec</b> c</td>
+        <td class="ok"><b>ld</b> c,*</td>
+        <td class="ok"><b>rrca</b></td>
+    </tr>
+    <tr>
+        <th>1</th>
+        <td class="ok"><b>djnz</b> *</td>
+        <td class="ok"><b>ld</b> de,**</td>
+        <td class="ok"><b>ld</b> (de),a</td>
+        <td class="ok"><b>inc</b> de</td>
+        <td class="ok"><b>inc</b> d</td>
+        <td class="ok"><b>dec</b> d</td>
+        <td class="ok"><b>ld</b> d,*</td>
+        <td class="ok"><b>rla</b></td>
+        <td class="ok"><b>jr</b> *</td>
+        <td class="ok"><b>add</b> hl, de</td>
+        <td class="ok"><b>ld</b> a,(de)</td>
+        <td class="ok"><b>dec</b> de</td>
+        <td class="ok"><b>inc</b> e</td>
+        <td class="ok"><b>dec</b> e</td>
+        <td class="ok"><b>ld</b> e,*</td>
+        <td class="ok"><b>rra</b></td>
+    </tr>
+    <tr>
+        <th>2</th>
+        <td class="ok"><b>jr</b> nz,*</td>
+        <td class="ok"><b>ld</b> hl,**</td>
+        <td class="ok"><b>ld</b> (**),hl</td>
+        <td class="ok"><b>inc</b> hl</td>
+        <td class="ok"><b>inc</b> h</td>
+        <td class="ok"><b>dec</b> h</td>
+        <td class="ok"><b>ld</b> h,*</td>
+        <td class="ok"><b>daa</b></td>
+        <td class="ok"><b>jr</b> z,*</td>
+        <td class="ok"><b>add</b> hl, hl</td>
+        <td class="ok"><b>ld</b> hl,(**)</td>
+        <td class="ok"><b>dec</b> hl</td>
+        <td class="ok"><b>inc</b> l</td>
+        <td class="ok"><b>dec</b> l</td>
+        <td class="ok"><b>ld</b> l,*</td>
+        <td class="ok"><b>cpl</b></td>
+    </tr>
+    <tr>
+        <th>3</th>
+        <td class="ok"><b>jr</b> nc,*</td>
+        <td class="ok"><b>ld</b> sp,**</td>
+        <td class="ok"><b>ld</b> (**),a</td>
+        <td class="ok"><b>inc</b> sp</td>
+        <td class="ok"><b>inc</b> (hl)</td>
+        <td class="ok"><b>dec</b> (hl)</td>
+        <td class="ok"><b>ld</b> (hl),*</td>
+        <td class="ok"><b>scf</b></td>
+        <td class="ok"><b>jr</b> c,*</td>
+        <td class="ok"><b>add</b> hl, sp</td>
+        <td class="ok"><b>ld</b> a,(**)</td>
+        <td class="ok"><b>dec</b> sp</td>
+        <td class="ok"><b>inc</b> a</td>
+        <td class="ok"><b>dec</b> a</td>
+        <td class="ok"><b>ld</b> a,*</td>
+        <td class="ok"><b>ccf</b></td>
+    </tr>
+    <tr>
+        <th>4</th>
+        <td class="ok"><b>ld</b> b,b</td>
+        <td class="ok"><b>ld</b> b,c</td>
+        <td class="ok"><b>ld</b> b,d</td>
+        <td class="ok"><b>ld</b> b,e</td>
+        <td class="ok"><b>ld</b> b,h</td>
+        <td class="ok"><b>ld</b> b,l</td>
+        <td class="ok"><b>ld</b> b,(hl)</td>
+        <td class="ok"><b>ld</b> b,a</td>
+        <td class="ok"><b>ld</b> c,b</td>
+        <td class="ok"><b>ld</b> c,c</td>
+        <td class="ok"><b>ld</b> c,d</td>
+        <td class="ok"><b>ld</b> c,e</td>
+        <td class="ok"><b>ld</b> c,h</td>
+        <td class="ok"><b>ld</b> c,l</td>
+        <td class="ok"><b>ld</b> c,(hl)</td>
+        <td class="ok"><b>ld</b> c,a</td>
+    </tr>
+    <tr>
+        <th>5</th>
+        <td class="ok"><b>ld</b> d,b</td>
+        <td class="ok"><b>ld</b> d,c</td>
+        <td class="ok"><b>ld</b> d,d</td>
+        <td class="ok"><b>ld</b> d,e</td>
+        <td class="ok"><b>ld</b> d,h</td>
+        <td class="ok"><b>ld</b> d,l</td>
+        <td class="ok"><b>ld</b> d,(hl)</td>
+        <td class="ok"><b>ld</b> d,a</td>
+        <td class="ok"><b>ld</b> e,b</td>
+        <td class="ok"><b>ld</b> e,c</td>
+        <td class="ok"><b>ld</b> e,d</td>
+        <td class="ok"><b>ld</b> e,e</td>
+        <td class="ok"><b>ld</b> e,h</td>
+        <td class="ok"><b>ld</b> e,l</td>
+        <td class="ok"><b>ld</b> e,(hl)</td>
+        <td class="ok"><b>ld</b> e,a</td>
+    </tr>
+    <tr>
+        <th>6</th>
+        <td class="ok"><b>ld</b> h,b</td>
+        <td class="ok"><b>ld</b> h,c</td>
+        <td class="ok"><b>ld</b> h,d</td>
+        <td class="ok"><b>ld</b> h,e</td>
+        <td class="ok"><b>ld</b> h,h</td>
+        <td class="ok"><b>ld</b> h,l</td>
+        <td class="ok"><b>ld</b> h,(hl)</td>
+        <td class="ok"><b>ld</b> h,a</td>
+        <td class="ok"><b>ld</b> l,b</td>
+        <td class="ok"><b>ld</b> l,c</td>
+        <td class="ok"><b>ld</b> l,d</td>
+        <td class="ok"><b>ld</b> l,e</td>
+        <td class="ok"><b>ld</b> l,h</td>
+        <td class="ok"><b>ld</b> l,l</td>
+        <td class="ok"><b>ld</b> l,(hl)</td>
+        <td class="ok"><b>ld</b> l,a</td>
+    </tr>
+    <tr>
+        <th>7</th>
+        <td class="ok"><b>ld</b> (hl),b</td>
+        <td class="ok"><b>ld</b> (hl),c</td>
+        <td class="ok"><b>ld</b> (hl),d</td>
+        <td class="ok"><b>ld</b> (hl),e</td>
+        <td class="ok"><b>ld</b> (hl),h</td>
+        <td class="ok"><b>ld</b> (hl),l</td>
+        <td class="ok"><b>halt</b></td>
+        <td class="ok"><b>ld</b> (hl),a</td>
+        <td class="ok"><b>ld</b> a,b</td>
+        <td class="ok"><b>ld</b> a,c</td>
+        <td class="ok"><b>ld</b> a,d</td>
+        <td class="ok"><b>ld</b> a,e</td>
+        <td class="ok"><b>ld</b> a,h</td>
+        <td class="ok"><b>ld</b> a,l</td>
+        <td class="ok"><b>ld</b> a,(hl)</td>
+        <td class="ok"><b>ld</b> a,a</td>
+    </tr>
+    <tr>
+        <th>8</th>
+        <td class="ok"><b>add</b>b</td>
+        <td class="ok"><b>add</b>c</td>
+        <td class="ok"><b>add</b>d</td>
+        <td class="ok"><b>add</b>e</td>
+        <td class="ok"><b>add</b>h</td>
+        <td class="ok"><b>add</b>l</td>
+        <td class="ok"><b>add</b>(hl)</td>
+        <td class="ok"><b>add</b>a</td>
+        <td class="ok"><b>adc</b>b</td>
+        <td class="ok"><b>adc</b>c</td>
+        <td class="ok"><b>adc</b>d</td>
+        <td class="ok"><b>adc</b>e</td>
+        <td class="ok"><b>adc</b>h</td>
+        <td class="ok"><b>adc</b>l</td>
+        <td class="ok"><b>adc</b>(hl)</td>
+        <td class="ok"><b>adc</b>a</td>
+    </tr>
+    <tr>
+        <th>9</th>
+        <td class="ok"><b>sub</b>b</td>
+        <td class="ok"><b>sub</b>c</td>
+        <td class="ok"><b>sub</b>d</td>
+        <td class="ok"><b>sub</b>e</td>
+        <td class="ok"><b>sub</b>h</td>
+        <td class="ok"><b>sub</b>l</td>
+        <td class="ok"><b>sub</b>(hl)</td>
+        <td class="ok"><b>sub</b>a</td>
+        <td class="ok"><b>sbc</b>b</td>
+        <td class="ok"><b>sbc</b>c</td>
+        <td class="ok"><b>sbc</b>d</td>
+        <td class="ok"><b>sbc</b>e</td>
+        <td class="ok"><b>sbc</b>h</td>
+        <td class="ok"><b>sbc</b>l</td>
+        <td class="ok"><b>sbc</b>(hl)</td>
+        <td class="ok"><b>sbc</b>a</td>
+    </tr>
+    <tr>
+        <th>A</th>
+        <td class="ok"><b>and</b>b</td>
+        <td class="ok"><b>and</b>c</td>
+        <td class="ok"><b>and</b>d</td>
+        <td class="ok"><b>and</b>e</td>
+        <td class="ok"><b>and</b>h</td>
+        <td class="ok"><b>and</b>l</td>
+        <td class="ok"><b>and</b>(hl)</td>
+        <td class="ok"><b>and</b>a</td>
+        <td class="ok"><b>xor</b>b</td>
+        <td class="ok"><b>xor</b>c</td>
+        <td class="ok"><b>xor</b>d</td>
+        <td class="ok"><b>xor</b>e</td>
+        <td class="ok"><b>xor</b>h</td>
+        <td class="ok"><b>xor</b>l</td>
+        <td class="ok"><b>xor</b>(hl)</td>
+        <td class="ok"><b>xor</b>a</td>
+    </tr>
+    <tr>
+        <th>B</th>
+        <td class="ok"><b>or</b>b</td>
+        <td class="ok"><b>or</b>c</td>
+        <td class="ok"><b>or</b>d</td>
+        <td class="ok"><b>or</b>e</td>
+        <td class="ok"><b>or</b>h</td>
+        <td class="ok"><b>or</b>l</td>
+        <td class="ok"><b>or</b>(hl)</td>
+        <td class="ok"><b>or</b>a</td>
+        <td class="ok"><b>cp</b>b</td>
+        <td class="ok"><b>cp</b>c</td>
+        <td class="ok"><b>cp</b>d</td>
+        <td class="ok"><b>cp</b>e</td>
+        <td class="ok"><b>cp</b>h</td>
+        <td class="ok"><b>cp</b>l</td>
+        <td class="ok"><b>cp</b>(hl)</td>
+        <td class="ok"><b>cp</b>a</td>
+    </tr>
+    <tr>
+        <th>C</th>
+        <td class="ok"><b>ret</b> nz</td>
+        <td class="ok"><b>pop</b> bc</td>
+        <td class="ok"><b>jp</b> nz,**</td>
+        <td class="ok"><b>jp</b> **</td>
+        <td class="ok"><b>call</b> nz,**</td>
+        <td class="ok"><b>push</b> bc</td>
+        <td class="ok"><b>add</b>*</td>
+        <td class="ok"><b>rst</b> #00</td>
+        <td class="ok"><b>ret</b> z</td>
+        <td class="ok"><b>ret</b></td>
+        <td class="ok"><b>jp</b> z,**</td>
+        <td class="px"><b>BITS</b></td>
+        <td class="ok"><b>call</b> z,**</td>
+        <td class="ok"><b>call</b> **</td>
+        <td class="ok"><b>adc</b>*</td>
+        <td class="ok"><b>rst</b> #08</td>
+    </tr>
+    <tr>
+        <th>D</th>
+        <td class="ok"><b>ret</b> nc</td>
+        <td class="ok"><b>pop</b> de</td>
+        <td class="ok"><b>jp</b> nc,**</td>
+        <td class="ok"><b>out</b> (*),a</td>
+        <td class="ok"><b>call</b> nc,**</td>
+        <td class="ok"><b>push</b> de</td>
+        <td class="ok"><b>sub</b>*</td>
+        <td class="ok"><b>rst</b> #10</td>
+        <td class="ok"><b>ret</b> c</td>
+        <td class="ok"><b>exx</b></td>
+        <td class="ok"><b>jp</b> c,**</td>        
+        <td class="ok"><b>in</b> a,(*)</td>
+        <td class="ok"><b>call</b> c,**</td>
+        <td class="px"><b>IX</b></td>
+        <td class="ok"><b>sbc</b>*</td>
+        <td class="ok"><b>rst</b> #18</td>
+    </tr>
+    <tr>
+        <th>E</th>
+        <td class="ok"><b>ret</b> po</td>
+        <td class="ok"><b>pop</b> hl</td>
+        <td class="ok"><b>jp</b> po,**</td>
+        <td class="ok"><b>ex</b> (sp),hl</td>
+        <td class="ok"><b>call</b> po,**</td>
+        <td class="ok"><b>push</b> hl</td>
+        <td class="ok"><b>and</b>*</td>
+        <td class="ok"><b>rst</b> #20</td>
+        <td class="ok"><b>ret</b> pe</td>
+        <td class="ok"><b>jp</b> (hl)</td>
+        <td class="ok"><b>jp</b> pe,**</td>
+        <td class="ok"><b>ex</b> de,hl</td>
+        <td class="ok"><b>call</b> pe,**</td>
+        <td class="px"><b>EXTD</b></td>
+        <td class="ok"><b>xor</b>*</td>
+        <td class="ok"><b>rst</b> #28</td>
+    </tr>
+    <tr>
+        <th>F</th>
+        <td class="ok"><b>ret</b> p</td>
+        <td class="ok"><b>pop</b> af</td>
+        <td class="ok"><b>jp</b> p,**</td>
+        <td class="ok"><b>di</b></td>
+        <td class="ok"><b>call</b> p,**</td>
+        <td class="ok"><b>push</b> af</td>
+        <td class="ok"><b>or</b>*</td>
+        <td class="ok"><b>rst</b> #30</td>
+        <td class="ok"><b>ret</b> m</td>
+        <td class="ok"><b>ld</b> sp,hl</td>
+        <td class="ok"><b>jp</b> m,**</td>
+        <td class="ok"><b>ei</b></td>
+        <td class="ok"><b>call</b> m,**</td>
+        <td class="px"><b>IY</b></td>
+        <td class="ok"><b>cp</b>*</td>
+        <td class="ok"><b>rst</b> #38</td>
+    </tr>    
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Extended instruction set</title>
+<style>
+table { border-collapse: collapse; } 
+table td, 
+table th { 
+    padding: 4px; border: 1px solid #ccc; font-family: Monospace; 
+    width: 100px; vertical-align: top; 
+    text-transform: uppercase;
+}
+table td b { display: block; }
+table th { background: #eee; }
+table td.ok { background: #cfc; }
+table td.px { background: #cff; }
+</style>
+</head>
+<body>
+<table>
+    <tr>
+        <th></th>
+        <th>0</th><th>1</th><th>2</th><th>3</th>
+        <th>4</th><th>5</th><th>6</th><th>7</th>
+        <th>8</th><th>9</th><th>A</th><th>B</th>
+        <th>C</th><th>D</th><th>E</th><th>F</th>
+    </tr>    
+    <tr>
+        <th>4</th>
+        <!--0--><td class="ok"><b>in</b> b,(c)</td>
+        <!--1--><td class="ok"><b>out</b> (c),b</td>
+        <!--2--><td class="ok"><b>sbc</b> hl,bc</td>
+        <!--3--><td class="ok"><b>ld</b> (**),bc</td>
+        <!--4--><td class="ok"><b>neg</b></td>
+        <!--5--><td class="ok"><b>retn</b></td>
+        <!--6--><td class="ok"><b>im</b> 0</td>
+        <!--7--><td class="ok"><b>ld</b> i,a</td>
+        <!--8--><td class="ok"><b>in</b> c,(c)</td>
+        <!--9--><td class="ok"><b>out</b> (c),c</td>
+        <!--A--><td class="ok"><b>adc</b> hl,bc</td>
+        <!--B--><td class="ok"><b>ld</b> bc,(**)</td>
+        <!--C--><td class="ok"><b>neg</b></td>
+        <!--D--><td class="ok"><b>reti</b></td>
+        <!--E--><td class="ok"><b>im</b> 0</td>
+        <!--F--><td class="ok"><b>ld</b> r,a</td>
+    </tr>
+    <tr>
+        <th>5</th>
+        <!--0--><td class="ok"><b>in</b> d,(c)</td>
+        <!--1--><td class="ok"><b>out</b> (c),d</td>
+        <!--2--><td class="ok"><b>sbc</b> hl,de</td>
+        <!--3--><td class="ok"><b>ld</b> (**),de</td>
+        <!--4--><td class="ok"><b>neg</b></td>
+        <!--5--><td class="ok"><b>retn</b></td>
+        <!--6--><td class="ok"><b>im</b> 1</td>
+        <!--7--><td class="ok"><b>ld</b> a,i</td>
+        <!--8--><td class="ok"><b>in</b> e,(c)</td>
+        <!--9--><td class="ok"><b>out</b> (c),e</td>
+        <!--A--><td class="ok"><b>adc</b> hl,de</td>
+        <!--B--><td class="ok"><b>ld</b> de,(**)</td>
+        <!--C--><td class="ok"><b>neg</b></td>
+        <!--D--><td class="ok"><b>retn</b></td>
+        <!--E--><td class="ok"><b>im</b> 2</td>
+        <!--F--><td class="ok"><b>ld</b> a,r</td>
+    </tr>
+    <tr>
+        <th>6</th>
+        <!--0--><td class="ok"><b>in</b> h,(c)</td>
+        <!--1--><td class="ok"><b>out</b> (c),h</td>
+        <!--2--><td class="ok"><b>sbc</b> hl,hl</td>
+        <!--3--><td class="ok"><b>ld</b> (**),hl</td>
+        <!--4--><td class="ok"><b>neg</b></td>
+        <!--5--><td class="ok"><b>retn</b></td>
+        <!--6--><td class="ok"><b>im</b> 0</td>
+        <!--7--><td class="ok"><b>rrd</b></td>
+        <!--8--><td class="ok"><b>in</b> l,(c)</td>
+        <!--9--><td class="ok"><b>out</b> (c),l</td>
+        <!--A--><td class="ok"><b>adc</b> hl,hl</td>
+        <!--B--><td class="ok"><b>ld</b> hl,(**)</td>
+        <!--C--><td class="ok"><b>neg</b></td>
+        <!--D--><td class="ok"><b>retn</b></td>
+        <!--E--><td class="ok"><b>im</b> 0</td>
+        <!--F--><td class="ok"><b>rld</b></td>
+    </tr>
+    <tr>
+        <th>7</th>
+        <!--0--><td class="ok"><b>in</b> (c)</td>
+        <!--1--><td class="ok"><b>out</b> (c),0</td>
+        <!--2--><td class="ok"><b>sbc</b> hl,sp</td>
+        <!--3--><td class="ok"><b>ld</b> (**),sp</td>
+        <!--4--><td class="ok"><b>neg</b></td>
+        <!--5--><td class="ok"><b>retn</b></td>
+        <!--6--><td class="ok"><b>im</b> 1</td>
+        <!--7--><td></td>
+        <!--8--><td class="ok"><b>in</b> a,(c)</td>
+        <!--9--><td class="ok"><b>out</b> (c),a</td>
+        <!--A--><td class="ok"><b>adc</b> hl,sp</td>
+        <!--B--><td class="ok"><b>ld</b> sp,(**)</td>
+        <!--C--><td class="ok"><b>neg</b></td>
+        <!--D--><td class="ok"><b>retn</b></td>
+        <!--E--><td class="ok"><b>im</b> 2</td>
+        <!--F--><td></td>
+    </tr>    
+    <tr>
+        <th>A</th>
+        <!--0--><td class="ok"><b>ldi</b></td>
+        <!--1--><td class="ok"><b>cpi</b></td>
+        <!--2--><td class="ok"><b>ini</b></td>
+        <!--3--><td class="ok"><b>outi</b></td>
+        <!--4--><td></td>
+        <!--5--><td></td>
+        <!--6--><td></td>
+        <!--7--><td></td>
+        <!--8--><td class="ok"><b>ldd</b></td>
+        <!--9--><td class="ok"><b>cpd</b></td>
+        <!--A--><td class="ok"><b>ind</b></td>
+        <!--B--><td class="ok"><b>outd</b></td>
+        <!--C--><td></td>
+        <!--D--><td></td>
+        <!--E--><td></td>
+        <!--F--><td></td>
+    </tr>
+    <tr>
+        <th>B</th>
+        <!--0--><td class="ok"><b>ldir</b></td>
+        <!--1--><td class="ok"><b>cpir</b></td>
+        <!--2--><td class="ok"><b>inir</b></td>
+        <!--3--><td class="ok"><b>otir</b></td>
+        <!--4--><td></td>
+        <!--5--><td></td>
+        <!--6--><td></td>
+        <!--7--><td></td>
+        <!--8--><td class="ok"><b>lddr</b></td>
+        <!--9--><td class="ok"><b>cpdr</b></td>
+        <!--A--><td class="ok"><b>indr</b></td>
+        <!--B--><td class="ok"><b>otdr</b></td>
+        <!--C--><td></td>
+        <!--D--><td></td>
+        <!--E--><td></td>
+        <!--F--><td></td>
+    </tr>    
+</table>

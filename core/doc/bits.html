@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bits instruction set</title>
+<style>
+table { border-collapse: collapse; } 
+table td, 
+table th { 
+    padding: 4px; border: 1px solid #ccc; font-family: Monospace; 
+    width: 100px; vertical-align: top; 
+    text-transform: uppercase;
+}
+table td b { display: block; }
+table th { background: #eee; }
+table td.ok { background: #cfc; }
+table td.px { background: #cff; }
+</style>
+</head>
+<body>
+<table>
+    <tr>
+        <th></th>
+        <th>0</th><th>1</th><th>2</th><th>3</th>
+        <th>4</th><th>5</th><th>6</th><th>7</th>
+        <th>8</th><th>9</th><th>A</th><th>B</th>
+        <th>C</th><th>D</th><th>E</th><th>F</th>
+    </tr>
+    <tr>
+        <th>0</th>
+        <!--0--><td class="ok"><b>rlc</b> b</td>
+        <!--1--><td class="ok"><b>rlc</b> c</td>
+        <!--2--><td class="ok"><b>rlc</b> d</td>
+        <!--3--><td class="ok"><b>rlc</b> e</td>
+        <!--4--><td class="ok"><b>rlc</b> h</td>
+        <!--5--><td class="ok"><b>rlc</b> l</td>
+        <!--6--><td class="ok"><b>rlc</b> (hl)</td>
+        <!--7--><td class="ok"><b>rlc</b> a</td>
+        <!--8--><td class="ok"><b>rrc</b> b</td>
+        <!--9--><td class="ok"><b>rrc</b> c</td>
+        <!--A--><td class="ok"><b>rrc</b> d</td>
+        <!--B--><td class="ok"><b>rrc</b> e</td>
+        <!--C--><td class="ok"><b>rrc</b> h</td>
+        <!--D--><td class="ok"><b>rrc</b> l</td>
+        <!--E--><td class="ok"><b>rrc</b> (hl)</td>
+        <!--F--><td class="ok"><b>rrc</b> a</td>
+    </tr>
+    <tr>
+        <th>1</th>
+        <!--0--><td class="ok"><b>rl</b> b</td>
+        <!--1--><td class="ok"><b>rl</b> c</td>
+        <!--2--><td class="ok"><b>rl</b> d</td>
+        <!--3--><td class="ok"><b>rl</b> e</td>
+        <!--4--><td class="ok"><b>rl</b> h</td>
+        <!--5--><td class="ok"><b>rl</b> l</td>
+        <!--6--><td class="ok"><b>rl</b> (hl)</td>
+        <!--7--><td class="ok"><b>rl</b> a</td>
+        <!--8--><td class="ok"><b>rr</b> b</td>
+        <!--9--><td class="ok"><b>rr</b> c</td>
+        <!--A--><td class="ok"><b>rr</b> d</td>
+        <!--B--><td class="ok"><b>rr</b> e</td>
+        <!--C--><td class="ok"><b>rr</b> h</td>
+        <!--D--><td class="ok"><b>rr</b> l</td>
+        <!--E--><td class="ok"><b>rr</b> (hl)</td>
+        <!--F--><td class="ok"><b>rr</b> a</td>
+    </tr>
+    <tr>
+        <th>2</th>
+        <!--0--><td class="ok"><b>sla</b> b</td>
+        <!--1--><td class="ok"><b>sla</b> c</td>
+        <!--2--><td class="ok"><b>sla</b> d</td>
+        <!--3--><td class="ok"><b>sla</b> e</td>
+        <!--4--><td class="ok"><b>sla</b> h</td>
+        <!--5--><td class="ok"><b>sla</b> l</td>
+        <!--6--><td class="ok"><b>sla</b> (hl)</td>
+        <!--7--><td class="ok"><b>sla</b> a</td>
+        <!--8--><td class="ok"><b>sra</b> b</td>
+        <!--9--><td class="ok"><b>sra</b> c</td>
+        <!--A--><td class="ok"><b>sra</b> d</td>
+        <!--B--><td class="ok"><b>sra</b> e</td>
+        <!--C--><td class="ok"><b>sra</b> h</td>
+        <!--D--><td class="ok"><b>sra</b> l</td>
+        <!--E--><td class="ok"><b>sra</b> (hl)</td>
+        <!--F--><td class="ok"><b>sra</b> a</td>
+    </tr>
+    <tr>
+        <th>3</th>
+        <!--0--><td class="ok"><b>sll</b> b</td>
+        <!--1--><td class="ok"><b>sll</b> c</td>
+        <!--2--><td class="ok"><b>sll</b> d</td>
+        <!--3--><td class="ok"><b>sll</b> e</td>
+        <!--4--><td class="ok"><b>sll</b> h</td>
+        <!--5--><td class="ok"><b>sll</b> l</td>
+        <!--6--><td class="ok"><b>sll</b> (hl)</td>
+        <!--7--><td class="ok"><b>sll</b> a</td>
+        <!--8--><td class="ok"><b>srl</b> b</td>
+        <!--9--><td class="ok"><b>srl</b> c</td>
+        <!--A--><td class="ok"><b>srl</b> d</td>
+        <!--B--><td class="ok"><b>srl</b> e</td>
+        <!--C--><td class="ok"><b>srl</b> h</td>
+        <!--D--><td class="ok"><b>srl</b> l</td>
+        <!--E--><td class="ok"><b>srl</b> (hl)</td>
+        <!--F--><td class="ok"><b>srl</b> a</td>
+    </tr>
+    <tr>
+        <th>4</th>
+        <!--0--><td class="ok"><b>bit</b> 0,b</td>
+        <!--1--><td class="ok"><b>bit</b> 0,c</td>
+        <!--2--><td class="ok"><b>bit</b> 0,d</td>
+        <!--3--><td class="ok"><b>bit</b> 0,e</td>
+        <!--4--><td class="ok"><b>bit</b> 0,h</td>
+        <!--5--><td class="ok"><b>bit</b> 0,l</td>
+        <!--6--><td class="ok"><b>bit</b> 0,(hl)</td>
+        <!--7--><td class="ok"><b>bit</b> 0,a</td>
+        <!--8--><td class="ok"><b>bit</b> 1,b</td>
+        <!--9--><td class="ok"><b>bit</b> 1,c</td>
+        <!--A--><td class="ok"><b>bit</b> 1,d</td>
+        <!--B--><td class="ok"><b>bit</b> 1,e</td>
+        <!--C--><td class="ok"><b>bit</b> 1,h</td>
+        <!--D--><td class="ok"><b>bit</b> 1,l</td>
+        <!--E--><td class="ok"><b>bit</b> 1,(hl)</td>
+        <!--F--><td class="ok"><b>bit</b> 1,a</td>
+    </tr>
+    <tr>
+        <th>5</th>
+        <!--0--><td class="ok"><b>bit</b> 2,b</td>
+        <!--1--><td class="ok"><b>bit</b> 2,c</td>
+        <!--2--><td class="ok"><b>bit</b> 2,d</td>
+        <!--3--><td class="ok"><b>bit</b> 2,e</td>
+        <!--4--><td class="ok"><b>bit</b> 2,h</td>
+        <!--5--><td class="ok"><b>bit</b> 2,l</td>
+        <!--6--><td class="ok"><b>bit</b> 2,(hl)</td>
+        <!--7--><td class="ok"><b>bit</b> 2,a</td>
+        <!--8--><td class="ok"><b>bit</b> 3,b</td>
+        <!--9--><td class="ok"><b>bit</b> 3,c</td>
+        <!--A--><td class="ok"><b>bit</b> 3,d</td>
+        <!--B--><td class="ok"><b>bit</b> 3,e</td>
+        <!--C--><td class="ok"><b>bit</b> 3,h</td>
+        <!--D--><td class="ok"><b>bit</b> 3,l</td>
+        <!--E--><td class="ok"><b>bit</b> 3,(hl)</td>
+        <!--F--><td class="ok"><b>bit</b> 3,a</td>
+    </tr>
+    <tr>
+        <th>6</th>
+        <!--0--><td class="ok"><b>bit</b> 4,b</td>
+        <!--1--><td class="ok"><b>bit</b> 4,c</td>
+        <!--2--><td class="ok"><b>bit</b> 4,d</td>
+        <!--3--><td class="ok"><b>bit</b> 4,e</td>
+        <!--4--><td class="ok"><b>bit</b> 4,h</td>
+        <!--5--><td class="ok"><b>bit</b> 4,l</td>
+        <!--6--><td class="ok"><b>bit</b> 4,(hl)</td>
+        <!--7--><td class="ok"><b>bit</b> 4,a</td>
+        <!--8--><td class="ok"><b>bit</b> 5,b</td>
+        <!--9--><td class="ok"><b>bit</b> 5,c</td>
+        <!--A--><td class="ok"><b>bit</b> 5,d</td>
+        <!--B--><td class="ok"><b>bit</b> 5,e</td>
+        <!--C--><td class="ok"><b>bit</b> 5,h</td>
+        <!--D--><td class="ok"><b>bit</b> 5,l</td>
+        <!--E--><td class="ok"><b>bit</b> 5,(hl)</td>
+        <!--F--><td class="ok"><b>bit</b> 5,a</td>
+    </tr>
+    <tr>
+        <th>7</th>
+        <!--0--><td class="ok"><b>bit</b> 6,b</td>
+        <!--1--><td class="ok"><b>bit</b> 6,c</td>
+        <!--2--><td class="ok"><b>bit</b> 6,d</td>
+        <!--3--><td class="ok"><b>bit</b> 6,e</td>
+        <!--4--><td class="ok"><b>bit</b> 6,h</td>
+        <!--5--><td class="ok"><b>bit</b> 6,l</td>
+        <!--6--><td class="ok"><b>bit</b> 6,(hl)</td>
+        <!--7--><td class="ok"><b>bit</b> 6,a</td>
+        <!--8--><td class="ok"><b>bit</b> 7,b</td>
+        <!--9--><td class="ok"><b>bit</b> 7,c</td>
+        <!--A--><td class="ok"><b>bit</b> 7,d</td>
+        <!--B--><td class="ok"><b>bit</b> 7,e</td>
+        <!--C--><td class="ok"><b>bit</b> 7,h</td>
+        <!--D--><td class="ok"><b>bit</b> 7,l</td>
+        <!--E--><td class="ok"><b>bit</b> 7,(hl)</td>
+        <!--F--><td class="ok"><b>bit</b> 7,a</td>
+    </tr>
+    <tr>
+        <th>8</th>
+        <!--0--><td class="ok"><b>res</b> 0,b</td>
+        <!--1--><td class="ok"><b>res</b> 0,c</td>
+        <!--2--><td class="ok"><b>res</b> 0,d</td>
+        <!--3--><td class="ok"><b>res</b> 0,e</td>
+        <!--4--><td class="ok"><b>res</b> 0,h</td>
+        <!--5--><td class="ok"><b>res</b> 0,l</td>
+        <!--6--><td class="ok"><b>res</b> 0,(hl)</td>
+        <!--7--><td class="ok"><b>res</b> 0,a</td>
+        <!--8--><td class="ok"><b>res</b> 1,b</td>
+        <!--9--><td class="ok"><b>res</b> 1,c</td>
+        <!--A--><td class="ok"><b>res</b> 1,d</td>
+        <!--B--><td class="ok"><b>res</b> 1,e</td>
+        <!--C--><td class="ok"><b>res</b> 1,h</td>
+        <!--D--><td class="ok"><b>res</b> 1,l</td>
+        <!--E--><td class="ok"><b>res</b> 1,(hl)</td>
+        <!--F--><td class="ok"><b>res</b> 1,a</td>
+    </tr>
+    <tr>
+        <th>9</th>
+        <!--0--><td class="ok"><b>res</b> 2,b</td>
+        <!--1--><td class="ok"><b>res</b> 2,c</td>
+        <!--2--><td class="ok"><b>res</b> 2,d</td>
+        <!--3--><td class="ok"><b>res</b> 2,e</td>
+        <!--4--><td class="ok"><b>res</b> 2,h</td>
+        <!--5--><td class="ok"><b>res</b> 2,l</td>
+        <!--6--><td class="ok"><b>res</b> 2,(hl)</td>
+        <!--7--><td class="ok"><b>res</b> 2,a</td>
+        <!--8--><td class="ok"><b>res</b> 3,b</td>
+        <!--9--><td class="ok"><b>res</b> 3,c</td>
+        <!--A--><td class="ok"><b>res</b> 3,d</td>
+        <!--B--><td class="ok"><b>res</b> 3,e</td>
+        <!--C--><td class="ok"><b>res</b> 3,h</td>
+        <!--D--><td class="ok"><b>res</b> 3,l</td>
+        <!--E--><td class="ok"><b>res</b> 3,(hl)</td>
+        <!--F--><td class="ok"><b>res</b> 3,a</td>
+    </tr>
+    <tr>
+        <th>A</th>
+        <!--0--><td class="ok"><b>res</b> 4,b</td>
+        <!--1--><td class="ok"><b>res</b> 4,c</td>
+        <!--2--><td class="ok"><b>res</b> 4,d</td>
+        <!--3--><td class="ok"><b>res</b> 4,e</td>
+        <!--4--><td class="ok"><b>res</b> 4,h</td>
+        <!--5--><td class="ok"><b>res</b> 4,l</td>
+        <!--6--><td class="ok"><b>res</b> 4,(hl)</td>
+        <!--7--><td class="ok"><b>res</b> 4,a</td>
+        <!--8--><td class="ok"><b>res</b> 5,b</td>
+        <!--9--><td class="ok"><b>res</b> 5,c</td>
+        <!--A--><td class="ok"><b>res</b> 5,d</td>
+        <!--B--><td class="ok"><b>res</b> 5,e</td>
+        <!--C--><td class="ok"><b>res</b> 5,h</td>
+        <!--D--><td class="ok"><b>res</b> 5,l</td>
+        <!--E--><td class="ok"><b>res</b> 5,(hl)</td>
+        <!--F--><td class="ok"><b>res</b> 5,a</td>
+    </tr>
+    <tr>
+        <th>B</th>
+        <!--0--><td class="ok"><b>res</b> 6,b</td>
+        <!--1--><td class="ok"><b>res</b> 6,c</td>
+        <!--2--><td class="ok"><b>res</b> 6,d</td>
+        <!--3--><td class="ok"><b>res</b> 6,e</td>
+        <!--4--><td class="ok"><b>res</b> 6,h</td>
+        <!--5--><td class="ok"><b>res</b> 6,l</td>
+        <!--6--><td class="ok"><b>res</b> 6,(hl)</td>
+        <!--7--><td class="ok"><b>res</b> 6,a</td>
+        <!--8--><td class="ok"><b>res</b> 7,b</td>
+        <!--9--><td class="ok"><b>res</b> 7,c</td>
+        <!--A--><td class="ok"><b>res</b> 7,d</td>
+        <!--B--><td class="ok"><b>res</b> 7,e</td>
+        <!--C--><td class="ok"><b>res</b> 7,h</td>
+        <!--D--><td class="ok"><b>res</b> 7,l</td>
+        <!--E--><td class="ok"><b>res</b> 7,(hl)</td>
+        <!--F--><td class="ok"><b>res</b> 7,a</td>
+    </tr>
+    <tr>
+        <th>C</th>
+        <!--0--><td class="ok"><b>set</b> 0,b</td>
+        <!--1--><td class="ok"><b>set</b> 0,c</td>
+        <!--2--><td class="ok"><b>set</b> 0,d</td>
+        <!--3--><td class="ok"><b>set</b> 0,e</td>
+        <!--4--><td class="ok"><b>set</b> 0,h</td>
+        <!--5--><td class="ok"><b>set</b> 0,l</td>
+        <!--6--><td class="ok"><b>set</b> 0,(hl)</td>
+        <!--7--><td class="ok"><b>set</b> 0,a</td>
+        <!--8--><td class="ok"><b>set</b> 1,b</td>
+        <!--9--><td class="ok"><b>set</b> 1,c</td>
+        <!--A--><td class="ok"><b>set</b> 1,d</td>
+        <!--B--><td class="ok"><b>set</b> 1,e</td>
+        <!--C--><td class="ok"><b>set</b> 1,h</td>
+        <!--D--><td class="ok"><b>set</b> 1,l</td>
+        <!--E--><td class="ok"><b>set</b> 1,(hl)</td>
+        <!--F--><td class="ok"><b>set</b> 1,a</td>
+    </tr>
+    <tr>
+        <th>D</th>
+        <!--0--><td class="ok"><b>set</b> 2,b</td>
+        <!--1--><td class="ok"><b>set</b> 2,c</td>
+        <!--2--><td class="ok"><b>set</b> 2,d</td>
+        <!--3--><td class="ok"><b>set</b> 2,e</td>
+        <!--4--><td class="ok"><b>set</b> 2,h</td>
+        <!--5--><td class="ok"><b>set</b> 2,l</td>
+        <!--6--><td class="ok"><b>set</b> 2,(hl)</td>
+        <!--7--><td class="ok"><b>set</b> 2,a</td>
+        <!--8--><td class="ok"><b>set</b> 3,b</td>
+        <!--9--><td class="ok"><b>set</b> 3,c</td>
+        <!--A--><td class="ok"><b>set</b> 3,d</td>
+        <!--B--><td class="ok"><b>set</b> 3,e</td>
+        <!--C--><td class="ok"><b>set</b> 3,h</td>
+        <!--D--><td class="ok"><b>set</b> 3,l</td>
+        <!--E--><td class="ok"><b>set</b> 3,(hl)</td>
+        <!--F--><td class="ok"><b>set</b> 3,a</td>
+    </tr>
+    <tr>
+        <th>E</th>
+        <!--0--><td class="ok"><b>set</b> 4,b</td>
+        <!--1--><td class="ok"><b>set</b> 4,c</td>
+        <!--2--><td class="ok"><b>set</b> 4,d</td>
+        <!--3--><td class="ok"><b>set</b> 4,e</td>
+        <!--4--><td class="ok"><b>set</b> 4,h</td>
+        <!--5--><td class="ok"><b>set</b> 4,l</td>
+        <!--6--><td class="ok"><b>set</b> 4,(hl)</td>
+        <!--7--><td class="ok"><b>set</b> 4,a</td>
+        <!--8--><td class="ok"><b>set</b> 5,b</td>
+        <!--9--><td class="ok"><b>set</b> 5,c</td>
+        <!--A--><td class="ok"><b>set</b> 5,d</td>
+        <!--B--><td class="ok"><b>set</b> 5,e</td>
+        <!--C--><td class="ok"><b>set</b> 5,h</td>
+        <!--D--><td class="ok"><b>set</b> 5,l</td>
+        <!--E--><td class="ok"><b>set</b> 5,(hl)</td>
+        <!--F--><td class="ok"><b>set</b> 5,a</td>
+    </tr>
+    <tr>
+        <th>F</th>
+        <!--0--><td class="ok"><b>set</b> 6,b</td>
+        <!--1--><td class="ok"><b>set</b> 6,c</td>
+        <!--2--><td class="ok"><b>set</b> 6,d</td>
+        <!--3--><td class="ok"><b>set</b> 6,e</td>
+        <!--4--><td class="ok"><b>set</b> 6,h</td>
+        <!--5--><td class="ok"><b>set</b> 6,l</td>
+        <!--6--><td class="ok"><b>set</b> 6,(hl)</td>
+        <!--7--><td class="ok"><b>set</b> 6,a</td>
+        <!--8--><td class="ok"><b>set</b> 7,b</td>
+        <!--9--><td class="ok"><b>set</b> 7,c</td>
+        <!--A--><td class="ok"><b>set</b> 7,d</td>
+        <!--B--><td class="ok"><b>set</b> 7,e</td>
+        <!--C--><td class="ok"><b>set</b> 7,h</td>
+        <!--D--><td class="ok"><b>set</b> 7,l</td>
+        <!--E--><td class="ok"><b>set</b> 7,(hl)</td>
+        <!--F--><td class="ok"><b>set</b> 7,a</td>
+    </tr>
+</table>

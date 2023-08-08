@@ -1,0 +1,15 @@
+megs: 32
+romimage: file=c:/bochs/BIOS-bochs-latest
+vgaromimage: file=c:/bochs/VGABIOS-lgpl-latest
+# floppya: 1_44=disk1.img, status=inserted
+# floppyb: 1_44=disk2.img, status=inserted
+ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14
+ata0-master: type=disk, path="c.img", mode=flat, biosdetect=auto, translation=auto
+boot: c
+display_library: win32, options="gui_debug"
+log: bochsout.txt
+mouse: type=ps2, enabled=0, toggle=ctrl+mbutton
+cpu: ips=15000000
+clock: sync=both
+keyboard: keymap=c:/bochs/keymaps/x11-pc-us.map
+magic_break: enabled=1
