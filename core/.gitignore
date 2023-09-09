@@ -23,8 +23,5 @@ greybox_tmp
 undo_redo.txt
 PLLJ_PLLSPE_INFO.txt
 c5_pin_model_dump.txt
-de0/rom32.mif
-de0/ram128.mif
-de0/tapdata.mif
 zxspectrum
 obj_dir

@@ -82,6 +82,9 @@ assign SD_DATA[0] = 1'bZ;
 // Объявления проводов
 // ---------------------------------------------------------------------
 
+assign GPIO_1[35] = 1'b0;
+assign GPIO_1[29] = spkr;
+
 // SW[0] =0 Быстрый; =1 Совместимый режим
 // SW[1] =0 60; =1 50 Герц
 // SW[2] =0 25 Mhz; =1 4.3 Mhz
@@ -127,6 +130,7 @@ wire [7:0]  ps2data;
 wire        ps2hit;
 wire [7:0]  inreg;
 wire        klatch;
+wire        spkr;
 
 // "Магнитная лента"
 wire        mic;
@@ -259,6 +263,7 @@ mmap ResourceRouterUnit
     // "Магнитная лента" и клавиатура
     .kbd            (kbd),
     .mic            (mic),
+    .spkr           (spkr),
     .inreg          (inreg),
     .klatch         (klatch),
     .tap_address    (tap_address),

@@ -2,52 +2,53 @@
 
 module mmap
 (
-    input   wire        reset_n,    // =0 Сигнал сброса
-    input   wire        clock,      // Частота процессора
-    input   wire        m0,
-    input   wire        hold,
-    input   wire [15:0] address,
+    input               reset_n,    // =0 Сигнал сброса
+    input               clock,      // Частота процессора
+    input               m0,
+    input               hold,
+    input        [15:0] address,
     output  reg  [ 7:0] i_data,     // Входящие данные в процессор
-    input   wire [ 7:0] o_data,     // Исходящие из процессора данных
-    input   wire        we,
+    input        [ 7:0] o_data,     // Исходящие из процессора данных
+    input               we,
     output  reg  [ 7:0] portin,
-    input   wire        portwe,
+    input               portwe,
 
     // Управление памятью
     output reg   [14:0] rom_address, // 32k
-    input  wire  [ 7:0] rom_idata,
-    input  wire  [ 7:0] rom_trdos,
+    input        [ 7:0] rom_idata,
+    input        [ 7:0] rom_trdos,
     output reg   [16:0] ram_address, // 128k
-    input  wire  [ 7:0] ram_idata,
+    input        [ 7:0] ram_idata,
     output reg          ram_we,
     output reg          tap_we,
 
     // Видеопамять
-    output wire         vidpage,
+    output              vidpage,
     output reg   [ 2:0] border,
 
     // Клавиатура, микрофон
-    input  wire  [ 7:0] kbd,
-    input  wire         mic,
-    input  wire  [ 7:0] inreg,
-    input  wire         klatch,
-    output wire  [16:0] tap_address,        // К памяти TAP/ExtVideo
-    input  wire  [16:0] tap_address_blk,    // TAP-модуль
+    input        [ 7:0] kbd,
+    input               mic,
+    input        [ 7:0] inreg,
+    input               klatch,
+    output reg          spkr,
+    output       [16:0] tap_address,        // К памяти TAP/ExtVideo
+    input        [16:0] tap_address_blk,    // TAP-модуль
 
     // Регистры AY
     output reg  [3:0]   ay_reg,
     output reg  [7:0]   ay_data_o,
-    input  wire [7:0]   ay_data_i,
+    input       [7:0]   ay_data_i,
     output reg          ay_req,
 
 
     // Интерфейс
     output reg          sd_signal,  // 0->1 Команда на позитивном фронте
     output reg  [ 1:0]  sd_cmd,     // ID команды
-    input  wire [ 7:0]  sd_din,     // Данные от SD
+    input       [ 7:0]  sd_din,     // Данные от SD
     output reg  [ 7:0]  sd_out,     // Запись на SD
-    input  wire         sd_busy,    // =1 Устройство занято
-    input  wire         sd_timeout  // =1 Истек таймаут
+    input               sd_busy,    // =1 Устройство занято
+    input               sd_timeout  // =1 Истек таймаут
 );
 
 initial begin
@@ -159,8 +160,8 @@ always @(posedge clock) begin
                 port7ffd <= o_data;
 
         end
-        // Запись бордера
-        else if (A[0] == 1'b0) begin border[2:0] <= o_data[2:0]; end
+        // Запись бордера и звука
+        else if (A[0] == 1'b0) begin spkr <= ^o_data[4:3]; border[2:0] <= o_data[2:0]; end
 
     end
 
