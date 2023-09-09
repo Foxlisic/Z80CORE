@@ -175,7 +175,7 @@ always @(posedge clock_cpu) reset_n <= locked & RESET_N;
 clockdiv ClockDivUnit
 (
     .reset_n    (reset_n),
-    .active     (~SW[2]),
+    .active     (1'b1), // ~SW[2]
     .clock      (clock_cpu),
     .freq       (43),  // 4.3 Mhz
     .fref       (250),
@@ -191,7 +191,7 @@ z80 Z80Tb
     // Основной интерфейс
     .clock      (clock_cpu),
     .reset_n    (reset_n),
-    .compat     (SW[0]),        // =0 Быстрый режим =1 Совместимый
+    .compat     (1'b1),         // =0 Быстрый режим =1 Совместимый SW[0]
     .hold       (hold),         // =1 Активен =0 Ожидание
     .irq        (irq),
     .address    (address),
@@ -223,7 +223,7 @@ ula ULAUnit
     .addrhi     (addrhi),
     .datahi     (datahi),
     .border     (border),
-    .sync50     (SW[1]),        // Выбор 50/60 Гц
+    .sync50     (1'b0),        // Выбор 50/60 Гц SW[1]
     .irq        (irq)
 );
 
