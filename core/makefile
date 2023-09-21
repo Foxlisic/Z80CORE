@@ -8,20 +8,21 @@ icarus:
 	vvp tb.qqq > NUL
 
 tbc: verilate
-	g++ -o zxspectrum -I$(VLIB) $(VLIB)/verilated.cpp zx.cc \
+	g++ -o zxspectrum zx.cc -lSDL2 -I$(VLIB) \
+		$(VLIB)/verilated.cpp $(VLIB)/verilated_threads.cpp \
 		obj_dir/Vz80__ALL.a \
 		obj_dir/Vula__ALL.a \
 		obj_dir/Vmmap__ALL.a \
 		obj_dir/Vps2__ALL.a \
 		obj_dir/Vkbd__ALL.a \
-		-lSDL2
+
 	strip zxspectrum
 verilate:
-	verilator -cc z80.v
-	verilator -cc ula.v
-	verilator -cc mmap.v
-	verilator -cc ps2.v
-	verilator -cc kbd.v
+	verilator --threads 1 -cc z80.v
+	verilator --threads 1 -cc ula.v
+	verilator --threads 1 -cc mmap.v
+	verilator --threads 1 -cc ps2.v
+	verilator --threads 1 -cc kbd.v
 	cd obj_dir && make -f Vz80.mk
 	cd obj_dir && make -f Vula.mk
 	cd obj_dir && make -f Vmmap.mk
