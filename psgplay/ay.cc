@@ -1,5 +1,5 @@
-enum AY_PARAM {
-
+enum AY_PARAM
+{
     AY_ENV_HOLD     = 1,
     AY_ENV_ALT      = 2,
     AY_ENV_ATTACK   = 4,
@@ -16,8 +16,8 @@ static const int ay_levels[16] =
 };
 
 // 44 байта https://audiocoding.ru/articles/2008-05-22-wav-file-structure/
-struct __attribute__((__packed__)) WAVEFMTHEADER {
-
+struct __attribute__((__packed__)) WAVEFMTHEADER 
+{
     unsigned int    chunkId;        // RIFF 0x52494646
     unsigned int    chunkSize;
     unsigned int    format;         // WAVE 0x57415645
@@ -33,38 +33,37 @@ struct __attribute__((__packed__)) WAVEFMTHEADER {
     unsigned int    subchunk2Size;  // Количество байт в области данных.
 };
 
-
-class AYChip {
-
+class AYChip 
+{
 protected:
 
-    int ay_regs[16];
-    int ay_amp[3];
-    int ay_tone_tick[3],
+    int ay_regs[16],
+		ay_amp[3],
+		ay_tone_tick[3],
         ay_tone_period[3],
         ay_tone_high[3],
-        ay_tone_levels[16];
-    int ay_noise_toggle,
+        ay_tone_levels[16],
+		ay_noise_toggle,
         ay_noise_period,
         ay_noise_tick,
-        ay_rng;
-    int ay_env_tick,
+        ay_rng,
+		ay_env_tick,
         ay_env_period,
         ay_env_first,
         ay_env_rev,
         ay_env_counter = 0,
         ay_env_internal_tick = 0,
-        ay_env_cycles;
-    int ay_mono;
-    int cur_cycle;
+        ay_env_cycles,
+		ay_mono,
+		cur_cycle;
 
     // ---
     unsigned char* psg;
-    int psg_size = 0;
-    int chan = 0;
-    int is_speaker = 0;
-    int frequency = 44100; // 44100, 22050, 11025
-    int maxsize = 33554432;
+    int psg_size = 0,
+		chan = 0,
+		is_speaker = 0,
+		frequency = 44100, // 44100, 22050, 11025
+		maxsize = 33554432;
 
     int* _left;
     int* _center;
@@ -74,8 +73,8 @@ protected:
 
 public:
 
-    AYChip() {
-
+    AYChip() 
+	{
         int i;
 
         // Коррекция уровня (128 == 0 уровень)
@@ -117,8 +116,8 @@ public:
     }
 
     // Запись данных в регистр
-    void write(int ay_register, int ay_data) {
-
+    void write(int ay_register, int ay_data)
+	{
         int reg_id  = ay_register & 15;
         int tone_id = reg_id >> 1;        // Биты [3:1] Номер частоты тона
 
@@ -173,8 +172,8 @@ public:
     }
 
     // Срабатывает каждые 32 такта Z80 процессора 3.5 Мгц (109.375 Khz)
-    int tick() {
-
+    int tick()
+	{
         int mixer    = ay_regs[7];
         int envshape = ay_regs[13];
 
@@ -319,8 +318,8 @@ public:
     }
 
     // Добавить уровень
-    void get(int& left, int& right) {
-
+    void get(int& left, int& right) 
+	{
         // Каналы A-слева; B-посередине; C-справа
         left  = 128 + (ay_amp[0] + (ay_amp[1]/2)) / 4;
         right = 128 + (ay_amp[2] + (ay_amp[1]/2)) / 4;
@@ -353,8 +352,8 @@ public:
     // ПРОИГРЫВАТЕЛЬ PSG
     // -----------------------------
 
-    void loadpsg(const char* fn) {
-
+    void loadpsg(const char* fn) 
+	{
         FILE* fp = fopen(fn, "rb");
 
         if (fp) {
@@ -373,8 +372,8 @@ public:
     }
 
     // Проиграть PSG
-    void play() {
-
+    void play() 
+	{
         int id = 0, i, left, right;
         unsigned int  wp = 0;
         unsigned char bf[2];

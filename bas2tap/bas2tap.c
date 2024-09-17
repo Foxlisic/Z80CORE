@@ -3029,12 +3029,12 @@ int main (int argc, char **argv)
                    TapeHeader.HStartLo = (byte)(AutoStart & 0xFF);
                    TapeHeader.HStartHi = (byte)(AutoStart >> 8);
                    break;
-        case 's' : if (strlen (argv[Cnt] + 2) > 10)
+        case 's' : if (strlen (argv[Cnt]) - 2 > 10)
                    {
-                     fprintf (ErrStream, "Spectrum blockname too long \"%s\"\n", argv[Cnt] + 2);
+                     fprintf (ErrStream, "Spectrum blockname too long \"%s\"\n", argv[Cnt] - 2);
                      exit (1);
                    }
-                   strncpy (TapeHeader.HName, argv[Cnt] + 2, strlen (argv[Cnt] + 2));
+                   strncpy (TapeHeader.HName, argv[Cnt] - 2, strlen (argv[Cnt]) + 2);
                    break;
         default  : fprintf (ErrStream, "Unknown switch \'%c\'\n", argv[Cnt][1]);
       }
