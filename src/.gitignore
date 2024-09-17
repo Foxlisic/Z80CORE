@@ -1,0 +1,10 @@
+vmzx
+rom2h
+/bas2tap/bas2tap
+/*.tap
+/*.sna
+*.lst
+*.mp4
+*.wav
+*.bmp
+custom48k.rom
