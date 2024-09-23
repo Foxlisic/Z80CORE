@@ -143,7 +143,7 @@ void Z80Spectrum::update_charline(int address) {
 
         int  pix = (byte & (0x80 >> j)) ? 1 : 0;
 
-        // Если есть атрибут мерация, то учитывать это
+        // Если есть атрибут мерцания, то учитывать это
         uint clr = bright | ((flash ? (pix ^ flash_state) : pix) ? frcolor : bgcolor);
 
         // Вывести пиксель
