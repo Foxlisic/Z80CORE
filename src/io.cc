@@ -54,7 +54,7 @@ int Z80Spectrum::io_read(int port) {
     // Управление памятью и режимами
     if (port == 0x7FFD) { return port_7ffd; }
     // SD
-    else if ((port & 0xFF) == 0x3F) { return spi_data; }  // SD Read Data
+    else if ((port & 0xFF) == 0x3F) { return spi_data;  }  // SD Read Data
     else if ((port & 0xFF) == 0x7F) { return sd_status; } // SD: Timeout=0, Busy=0
     // AY
     else if (port == 0xFFFD) { return ay_register; }

@@ -7,7 +7,8 @@ all: build myrom
 # Собственный биос
 myrom:
 	sjasm custom48k.asm custom48k.rom
-	./vmzx -r1 custom48k.rom -x -d
+	# ./vmzx -r1 custom48k.rom -x -d
+	./vmzx -r0 bios.rom -2 -x
 
 # Сборка файла
 build:
