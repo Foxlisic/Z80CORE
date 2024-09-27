@@ -51,12 +51,15 @@ void Z80Spectrum::mem_write(int address, int data) {
 // Чтение из порта
 int Z80Spectrum::io_read(int port) {
 
-    // Чтение клавиатуры
-    if (port == 0x7FFD) {
-        return port_7ffd;
-    }
+    // Управление памятью и режимами
+    if (port == 0x7FFD) { return port_7ffd; }
+    // SD
+    else if ((port & 0xFF) == 0x3F) { return spi_data; }  // SD Read Data
+    else if ((port & 0xFF) == 0x7F) { return sd_status; } // SD: Timeout=0, Busy=0
+    // AY
     else if (port == 0xFFFD) { return ay_register; }
     else if (port == 0xBFFD) { return ay_regs[ay_register%15]; }
+    // Чтение клавиатуры
     else if ((port & 1) == 0) {
 
         // Чтение из порта во время движения луча по бордеру
@@ -71,7 +74,7 @@ int Z80Spectrum::io_read(int port) {
         return result;
     }
     // Kempston Joystick
-    else if ((port & 0x00e0) == 0x0000) {
+    else if ((port & 0x00E0) == 0x0000) {
         return 0x00;
     }
 
@@ -88,6 +91,18 @@ void Z80Spectrum::io_write(int port, int data) {
             data |= 0x20;
 
         port_7ffd = data;
+    }
+    // SD DATA SEND/RECV
+    else if ((port & 0xFF) == 0x3F) {
+
+        sd_status = 0x00;
+        sd_cmd(data);
+    }
+    // SD COMMAND :: Случай CMD=1, отсылается FFh
+    else if ((port & 0xFF) == 0x7F) {
+
+        sd_status = 0x00;
+        if ((data & 3) == 1) sd_cmd(0xFF);
     }
     // AY address register
     else if (port == 0xFFFD) { ay_register = data & 15; }
