@@ -26,6 +26,7 @@
 #include "io.cc"
 #include "snapshot.cc"
 #include "disasm.cc"
+#include "sd.cc"
 
 int main(int argc, char* argv[]) {
 

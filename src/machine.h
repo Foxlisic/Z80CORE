@@ -118,6 +118,16 @@ protected:
     int     trdos_latch;
 
 // -----------------------------------------------------------------
+// Свойства: SD карта
+// -----------
+
+    uint8_t     spi_data, spi_st = 2, spi_status, spi_command, spi_crc, spi_resp, sd_status = 0x80;
+    uint32_t    spi_arg, spi_lba;
+    uint16_t    spi_phase;
+    uint8_t     spi_sector[512];
+    FILE*       spi_file;
+
+// -----------------------------------------------------------------
 // Свойства: Видеоадаптер
 // -----------------------------------------------------------------
 
@@ -216,6 +226,7 @@ protected:
     void    io_write    (int port, int data);
 
     void    trdos_handler();
+    uint8_t sd_cmd(uint8_t data);
 
 // -----------------------------------------------------------------
 // Методы: Звук
